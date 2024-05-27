@@ -1,26 +1,21 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-</template>
+<script setup>
+import { ref } from 'vue';
+import ImageGallery from './components/ImageGallery.vue';
+import SideBar from './components/SideBar.vue';
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+const isGrayspace = ref(false);
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+const selectOption = (currentState) => {
+  isGrayspace.value = currentState;
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<template>
+  <v-app>
+    <SideBar @select-Option="selectOption" />
+    <v-main>
+      <!-- Cards -->
+      <ImageGallery :is-grayspace="isGrayspace"/>
+    </v-main>
+  </v-app>
+</template>
